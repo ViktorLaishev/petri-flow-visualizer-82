@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { usePetriNet } from "@/contexts/PetriNetContext";
 import { Button } from "@/components/ui/button";
@@ -374,7 +373,7 @@ const PnmlImporter: React.FC = () => {
     )} (${new Date().toLocaleTimeString()})`;
 
     // Create a new net and reset - ensure a clean slate
-    petriNetContext.savePetriNet(netName);
+
     petriNetContext.reset();
 
     // Create an ID mapping to handle remapping special places

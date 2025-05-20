@@ -762,13 +762,13 @@ const rulesMap: Record<
 const initialGraph = (): Graph => {
   return {
     nodes: [
-      { id: "P0", type: "place", tokens: 1 },
-      { id: "P_out", type: "place", tokens: 0 },
-      { id: "T0", type: "transition" },
+      // { id: "P0", type: "place", tokens: 1 },
+      // { id: "P_out", type: "place", tokens: 0 },
+      // { id: "T0", type: "transition" },
     ],
     edges: [
-      { source: "P0", target: "T0" },
-      { source: "T0", target: "P_out" },
+      // { source: "P0", target: "T0" },
+      // { source: "T0", target: "P_out" },
     ],
   };
 };

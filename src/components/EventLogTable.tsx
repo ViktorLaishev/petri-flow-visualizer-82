@@ -9,15 +9,33 @@ import {
 } from "@/components/ui/table";
 import { usePetriNet } from "@/contexts/PetriNetContext";
 import { Badge } from "@/components/ui/badge";
+import { AlertCircle } from "lucide-react";
 
 const EventLogTable: React.FC = () => {
   const { state } = usePetriNet();
-  const { eventLog } = state;
+  const { eventLog, graph } = state;
+
+  // Check if P0 and P_out exist in the graph
+  const hasP0 = graph.nodes.some((node) => node.id === "P0");
+  const hasPOut = graph.nodes.some((node) => node.id === "P_out");
+  const missingRequiredNodes = !hasP0 || !hasPOut;
 
   if (eventLog.paths.length === 0) {
     return (
       <div className="text-center py-8 text-slate-500 dark:text-slate-400">
-        No event paths generated yet. Please generate the event log first.
+        {missingRequiredNodes ? (
+          <div className="flex flex-col items-center gap-2">
+            <AlertCircle className="h-6 w-6 text-amber-500" />
+            <p>
+              Event log generation requires both P0 and P_out nodes in your
+              Petri net.
+            </p>
+            {!hasP0 && <p className="text-sm">Missing: P0 (start node)</p>}
+            {!hasPOut && <p className="text-sm">Missing: P_out (end node)</p>}
+          </div>
+        ) : (
+          "No event paths generated yet. Please generate the event log first."
+        )}
       </div>
     );
   }
